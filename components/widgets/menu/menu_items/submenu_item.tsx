@@ -37,6 +37,7 @@ export type Props = {
     text: React.ReactNode;
     selectedValueText?: React.ReactNode;
     subMenu?: Props[];
+    subMenuClass?: string;
     icon?: React.ReactNode;
     action?: (id?: string) => void;
     filter?: (id?: string) => boolean;
@@ -59,6 +60,7 @@ export default class SubMenuItem extends React.PureComponent<Props, State> {
     public static defaultProps = {
         show: true,
         direction: 'left',
+        subMenuClass: 'pl-4',
     };
 
     public constructor(props: Props) {
@@ -144,7 +146,11 @@ export default class SubMenuItem extends React.PureComponent<Props, State> {
     }
 
     public render() {
+<<<<<<< HEAD
         const {id, postId, text, selectedValueText, subMenu, root, icon, filter, xOffset, ariaLabel, direction, styleSelectableItem} = this.props;
+=======
+        const {id, subMenuClass, postId, text, subMenu, root, icon, filter, xOffset, ariaLabel, direction} = this.props;
+>>>>>>> 56816a00d (Updating style for DND submenu)
         const isMobile = Utils.isMobile();
 
         if (filter && !filter(id)) {
@@ -154,10 +160,15 @@ export default class SubMenuItem extends React.PureComponent<Props, State> {
         let textProp = text;
         if (icon) {
             textProp = (
+<<<<<<< HEAD
                 <React.Fragment>
                     <span className={classNames(['icon', {'sorting-menu-icon': styleSelectableItem}])}>{icon}</span>
+=======
+                <div className='d-flex align-items-center'>
+                    <span className='icon'>{icon}</span>
+>>>>>>> 56816a00d (Updating style for DND submenu)
                     {text}
-                </React.Fragment>
+                </div>
             );
         }
 
@@ -224,7 +235,11 @@ export default class SubMenuItem extends React.PureComponent<Props, State> {
                 ref={this.node}
             >
                 <div
+<<<<<<< HEAD
                     className={classNames([{styleSelectableItemDiv: styleSelectableItem}])}
+=======
+                    className={classNames(subMenuClass, 'justify-content-between')}
+>>>>>>> 56816a00d (Updating style for DND submenu)
                     id={id}
                     aria-label={ariaLabel}
                     onMouseEnter={this.show}

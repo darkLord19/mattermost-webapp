@@ -20,8 +20,8 @@
         }
 
         span.icon {
-            width: 28px; // less 12px padding is 16px
-            height: 16px; // less 3px top padding is 16px;
+            width: 26px; // less 12px padding is 16px
+            height: 14px; // less 3px top padding is 16px;
             padding-right: 12px;
             line-height: 16px;
             display: inline-block;
@@ -71,7 +71,7 @@
             clear: both;
             color: inherit;
             cursor: pointer;
-            display: block;
+            display: flex;
             font-weight: normal;
             padding: 1px 16px;
             text-align: left;
@@ -79,9 +79,11 @@
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 28px;
+            line-height: 32px;
+            min-height: 32px;
 
             &.MenuItem__with-help {
+                display: block;
                 height: auto;
 
                 .MenuItem__primary-text {
@@ -139,14 +141,23 @@
 }
 
 .SubMenu__icon-left {
+<<<<<<< HEAD
     color: rgba(var(--center-channel-color-rgb), 0.56);
     font-size: 19px;
     position: relative;
     top: 0;
+=======
+    color: rgba(var(--sys-center-channel-color-rgb), 0.48);
+    font-size: 18px;
+>>>>>>> 56816a00d (Updating style for DND submenu)
 }
 
 .SubMenu__icon-left-empty {
     display: none;
+<<<<<<< HEAD
+=======
+    visibility: hidden;
+>>>>>>> 56816a00d (Updating style for DND submenu)
     font-size: 19px;
     position: relative;
     top: 0;
@@ -154,10 +165,15 @@
 }
 
 .SubMenu__icon-right {
+<<<<<<< HEAD
     color: rgba(var(--center-channel-color-rgb), 0.56);
     font-size: 19px;
     padding-top: 3px;
     float: right;
+=======
+    color: rgba(var(--sys-center-channel-color-rgb), 0.48);
+    font-size: 18px;
+>>>>>>> 56816a00d (Updating style for DND submenu)
 }
 
 .SubMenu__icon-right-empty {
