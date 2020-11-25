@@ -281,6 +281,7 @@ export const ModalIdentifiers = {
     CLOUD_PURCHASE: 'cloud_purchase',
     COMMERCIAL_SUPPORT: 'commercial_support',
     NO_INTERNET_CONNECTION: 'no_internet_connection',
+    DND_CUSTOM_TIME_PICKER: 'dnd_custom_time_picker',
 };
 
 export const UserStatuses = {
