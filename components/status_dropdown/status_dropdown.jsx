@@ -18,6 +18,8 @@ import StatusOnlineIcon from 'components/widgets/icons/status_online_icon';
 import StatusDndIcon from 'components/widgets/icons/status_dnd_icon';
 import StatusOfflineIcon from 'components/widgets/icons/status_offline_icon';
 
+import CustomStatusModal from 'components/custom_status_modal';
+
 export default class StatusDropdown extends React.PureComponent {
     static propTypes = {
         style: PropTypes.object,
@@ -68,6 +70,16 @@ export default class StatusDropdown extends React.PureComponent {
         this.setStatus(UserStatuses.DND);
     }
 
+    setCustom = (event, message) => {
+        event.preventDefault();
+        this.props.actions.setStatus({
+            user_id: this.props.userId,
+            status: UserStatuses.CUSTOM_MESSAGE,
+            message,
+        });
+    }
+
+
     showStatusChangeConfirmation = (status) => {
         const resetStatusModalData = {
             ModalId: ModalIdentifiers.RESET_STATUS,
@@ -105,6 +117,19 @@ export default class StatusDropdown extends React.PureComponent {
             </FormattedMessage>
         );
     }
+
+    showCustomStatusInputModal = () => {
+        const resetStatusModalData = {
+            ModalId: ModalIdentifiers.CUSTOM_STATUS,
+            dialogType: CustomStatusModal,
+            dialogProps: {
+                userId: this.props.userId,
+                setStatus: this.props.actions.setStatus,
+            },
+        };
+
+        this.props.actions.openModal(resetStatusModalData);
+    };
 
     render() {
         const needsConfirm = this.isUserOutOfOffice() && this.props.autoResetPref === '';
@@ -185,6 +210,11 @@ export default class StatusDropdown extends React.PureComponent {
                             text={localizeMessage('status_dropdown.set_offline', 'Offline')}
                             icon={<StatusOfflineIcon/>}
                             id={'status-menu-offline'}
+                        />
+                        <Menu.ItemAction
+                            onClick={this.showCustomStatusInputModal}
+                            text={'Custom'}
+                            id={'status-menu-custom'}
                         />
                     </Menu.Group>
                 </Menu>
