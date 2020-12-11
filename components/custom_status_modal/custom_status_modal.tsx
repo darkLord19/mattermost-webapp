@@ -24,6 +24,7 @@ type Props = {
 
 type State = {
     userId: string;
+    message: string;
 }
 
 export default class CustomStatusModal extends React.PureComponent<Props, State> {
@@ -32,6 +33,7 @@ export default class CustomStatusModal extends React.PureComponent<Props, State>
 
         this.state = {
             userId: props.userId || '',
+            message: '',
         };
     }
 
@@ -79,6 +81,19 @@ export default class CustomStatusModal extends React.PureComponent<Props, State>
             modalHeaderText,
             confirmButtonText,
         };
+    }
+
+    handleChange = (event: any) => {
+        this.setState({ message: event.target.value });
+    }
+
+    handleSubmit = (event: any) => {
+        event.preventDefault();
+        this.props.setStatus({
+            user_id: this.props.userId,
+            status: UserStatuses.CUSTOM_MESSAGE,
+            message: this.state.message,
+        });
     }
 
     render() {
@@ -134,12 +149,24 @@ export default class CustomStatusModal extends React.PureComponent<Props, State>
                 onHide={this.props.onHide}
                 modalHeaderText={modalHeaderText}
                 confirmButtonText={confirmButtonText}
-                id='dndCustomTimePickerModal'
+                id='customStatusSetModal'
                 className={'modal-overflow'}
             >
 
                 {
-                    <textarea id='status_box'/>
+                    <form
+                        id='custom-status-form'
+                    >
+                        <textarea
+                            id='custom-status-text-area'
+                            name='textarea'
+                            onChange={this.handleChange}
+                        />
+                        <input
+                            type='submit'
+                            value='Save'
+                        />
+                    </form>
                 }
 
                 {
@@ -150,7 +177,7 @@ export default class CustomStatusModal extends React.PureComponent<Props, State>
                         noCaret={true}
                     >
                         <MenuItem
-                            className={'dnd-pickers-dropdown-menu'}
+                            className={'status-date-dropdown-menu'}
                         >
                             <DayPicker
                                 onDayClick={handleDayClick}
@@ -169,13 +196,6 @@ export default class CustomStatusModal extends React.PureComponent<Props, State>
                     >
                         {timeMenuItems}
                     </DropdownButton>
-                }
-                {
-                    <button
-                        onClick={setStatus}
-                    >
-                        {'Done'}
-                    </button>
                 }
             </GenericModal>
         );
