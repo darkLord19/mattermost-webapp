@@ -11,8 +11,10 @@ import { UserCustomStatus } from 'mattermost-redux/src/types/users';
 
 type Props = {
     onHide: () => void;
-    // setCustomStatus: (status: UserCustomStatus) => ActionFunc
     userId: string;
+    actions: {
+        setCustomStatus: (status: UserCustomStatus) => ActionFunc
+    }
 };
 
 type State = {
@@ -58,7 +60,12 @@ export default class CustomStatusInputModal extends React.PureComponent<Props, S
 
     handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log('status is', this.state.message);
+        this.props.actions.setCustomStatus({
+            user_id: this.props.userId,
+            text: this.state.message,
+            emoji: '',
+            expire_time: '',
+        });
     }
 
     render() {
